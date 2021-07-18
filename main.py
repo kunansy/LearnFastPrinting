@@ -107,12 +107,10 @@ class KeysStat:
         return len(self.keys)
 
     def __str__(self) -> str:
-        keys = '\n'.join(
-            repr(key)
+        return '\n\n'.join(
+            f"{key!r}"
             for key in sorted(self.keys, key=lambda key: key.answers_count)
         )
-        return f"{self.__class__.__name__}(\n" \
-               f"{keys}\n"
 
 
 def learn() -> None:
