@@ -43,6 +43,10 @@ class KeyStat:
     def answers_count(self) -> int:
         return self.wrong_answers + self.right_answers
 
+    @property
+    def effectiveness(self) -> float:
+        return round(self.answers_count / self.right_answers * 100, 2)
+
     def answer(self,
                answer: str,
                answer_time: float) -> None:
@@ -59,7 +63,8 @@ class KeyStat:
     def __repr__(self) -> str:
         return f"{self.key}: {self.value},\n" \
                f"{self.wrong_answers=},\n" \
-               f"{self.right_answers=}"
+               f"{self.right_answers=},\n" \
+               f"{self.effectiveness=}%"
 
 
 @dataclass
