@@ -111,28 +111,24 @@ class KeysStat:
 
 
 def learn() -> None:
-    answers_time = 0
-    answers = right_answers = 0
-    keys = list(KEYS_TO_LEARN.keys())
+    keys = KeysStat(KEYS_TO_LEARN)
     while True:
-        key = random.choice(keys)
-        sleep = random.randint(2, 10)
+        key: KeyStat = random.choice(keys)
+        sleep = random.randint(2, 6)
         time.sleep(sleep)
 
-        answers += 1
         start = time.perf_counter()
-        answer = input(key)
-        answ_time = round(time.perf_counter() - start, 2)
-        answers_time += answ_time
+        answer = input(f"{key}\n")
+        answer_time = round(time.perf_counter() - start, 2)
 
-        if answer == KEYS_TO_LEARN[key]:
-            print(Fore.GREEN, f"[{answ_time}]      RIGHT", Fore.RESET)
-            right_answers += 1
+        if answer == ':q':
+            break
+        elif answer == ':h':
+            print(keys)
         else:
-            print(Fore.RED, f"[{answ_time}]     WRONG", Fore.RESET)
+            key.answer(answer, answer_time)
 
-    print(f"Avg answer time={round(answers_time / answers)}s")
-
+    print(keys)
 
 
 def main() -> None:
