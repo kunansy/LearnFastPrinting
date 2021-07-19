@@ -9,6 +9,7 @@ from colorama import Fore
 
 
 KEYS_TO_LEARN = keys.ENGLISH_UP_KEYS
+SLEEP_TIME = random.randint(1, 3) 
 
 
 @dataclass
@@ -124,7 +125,7 @@ def learn() -> None:
     while True:
         key: KeyStat = random.choice(keys)
 
-        sleep = random.randint(2, 6)
+        sleep = SLEEP_TIME
         time.sleep(sleep)
         os.system('clear')
 
