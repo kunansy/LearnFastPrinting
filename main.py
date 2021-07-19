@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import random
 import time
 from src import keys
@@ -122,8 +123,10 @@ def learn() -> None:
     keys = KeysStat(KEYS_TO_LEARN)
     while True:
         key: KeyStat = random.choice(keys)
+
         sleep = random.randint(2, 6)
         time.sleep(sleep)
+        os.system('clear')
 
         start = time.perf_counter()
         answer = input(f"{key}\n")
