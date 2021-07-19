@@ -67,7 +67,7 @@ class KeysStat:
             ]
         elif isinstance(keys, (list, str)):
             keys = [
-                KeyStat({key: key.lower()})
+                KeyStat({key.upper(): key.lower()})
                 for key in keys
             ]
         self.keys = keys
