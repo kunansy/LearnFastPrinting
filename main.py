@@ -1,27 +1,14 @@
 #!/usr/bin/env python3
 import random
-import string
 import time
+from src import keys
 from dataclasses import dataclass
 
 from colorama import Fore
 
 
-ENGLISH_ALPHABET = string.ascii_uppercase
-RUSSIAN_ALPHABET = 'ё' + ''.join(
-    chr(letter_index)
-    for letter_index in range(ord('а'), ord('я') + 1)
-)
-
-HJKL = {
-    "UP": 'k',
-    "DOWN": 'j',
-    "LEFT": 'h',
-    "RIGHT": 'l'
-}
-
 KEYS_TO_LEARN = {
-    **HJKL
+    **keys.HJKL
 }
 
 
