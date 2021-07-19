@@ -7,9 +7,7 @@ from dataclasses import dataclass
 from colorama import Fore
 
 
-KEYS_TO_LEARN = {
-    **keys.ENGLISH_UP_KEYS
-}
+KEYS_TO_LEARN = keys.ENGLISH_UP_KEYS
 
 
 @dataclass
@@ -32,7 +30,9 @@ class KeyStat:
 
     @property
     def effectiveness(self) -> float:
-        return round(self.answers_count / self.right_answers * 100, 2)
+        if self.answers_count == 0:
+            return 0.
+        return round(self.right_answers / self.answers_count * 100, 2)
 
     def answer(self,
                answer: str,
