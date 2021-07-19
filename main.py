@@ -15,6 +15,7 @@ class KeyStat:
     _key: dict[str, str]
     right_answers: int = 0
     wrong_answers: int = 0
+    spent_time: float = 0
 
     @property
     def key(self) -> str:
@@ -27,6 +28,12 @@ class KeyStat:
     @property
     def answers_count(self) -> int:
         return self.wrong_answers + self.right_answers
+    
+    @property
+    def avg_time(self) -> float:
+        if self.answers_count == 0:
+            return 0.
+        return round(self.spent_time / self.answers_count, 2)
 
     @property
     def effectiveness(self) -> float:
@@ -37,6 +44,8 @@ class KeyStat:
     def answer(self,
                answer: str,
                answer_time: float) -> None:
+        self.spent_time += answer_time
+
         if answer == self.value:
             print(Fore.GREEN, f"[{answer_time}]{' ' * 5} RIGHT", Fore.RESET, sep='')
             self.right_answers += 1
@@ -51,7 +60,8 @@ class KeyStat:
         return f"{self.key}: {self.value},\n" \
                f"{self.wrong_answers=},\n" \
                f"{self.right_answers=},\n" \
-               f"{self.effectiveness=}%"
+               f"{self.effectiveness=}%,\n" \
+               f"{self.avg_time=}s"
 
 
 @dataclass
