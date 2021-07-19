@@ -8,7 +8,7 @@ from colorama import Fore
 
 
 KEYS_TO_LEARN = {
-    **keys.HJKL
+    **keys.ENGLISH_UP_KEYS
 }
 
 
@@ -59,30 +59,38 @@ class KeysStat:
     keys: list[KeyStat]
 
     def __init__(self,
-                 keys: dict[str, str]) -> None:
-        self.keys = [
-            KeyStat({key: value})
-            for key, value in keys.items()
-        ]
+                 keys: dict[str, str] or str or list[str]) -> None:
+        if isinstance(keys, dict):
+            keys = [
+                KeyStat({key: value})
+                for key, value in keys.items()
+            ]
+        elif isinstance(keys, (list, str)):
+            keys = [
+                KeyStat({key: key.lower()})
+                for key in keys
+            ]
+        self.keys = keys
+
 
     @property
     def wrongest_key(self) -> KeyStat:
         return max(
             self.keys,
-            key=lambda key: key.wrong_answers - key.right_answers
+            key=lambda key: key.effectiveness
         )
 
     @property
     def rightest_key(self) -> KeyStat:
-        return max(
+        return min(
             self.keys,
-            key=lambda key: key.right_answers - key.wrong_answers
+            key=lambda key: key.effectiveness
         )
 
     @property
     def answers_count(self) -> int:
         return sum(
-            key.wrong_answers + key.right_answers
+            key.answers_count
             for key in self.keys
         )
 
