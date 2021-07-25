@@ -8,8 +8,8 @@ from dataclasses import dataclass
 from colorama import Fore
 
 
-KEYS_TO_LEARN = keys.ENGLISH_UP_KEYS
-SLEEP_TIME = random.randint(1, 3) 
+KEYS_TO_LEARN = keys.ENGLISH_ALPHABET
+SLEEP_TIME = random.random()
 
 
 @dataclass
@@ -83,7 +83,6 @@ class KeysStat:
                 for key in keys
             ]
         self.keys = keys
-
 
     @property
     def wrongest_key(self) -> KeyStat:
